@@ -1,0 +1,97 @@
+Forward Euler Behavior:
+ What happens to the solution as time increases?
+	At first, the solution looks correct, but after some time, it starts jumping up and down or growing too fast if the step size h is too big.
+	This happens because the equation has a strong decay term (−50y), making it a stiff equation (Stiff equations are hard to solve using simple methods like Forward 	Euler)
+
+ Is the Forward Euler method stable?
+	If h is small, the solution is stable and if h is too big, the solution becomes unstable and grows too much this happens because Forward Euler is an explicit method, meaning it only 	looks at the current step and does not adjust for future changes.
+
+Modified Euler Behavior:
+ How does the Modified Euler solution behave?
+	The Modified Euler method (Heun’s method) gives a smoother and more accurate solution than the Forward Euler method ,this is because it uses a predictor-corrector step, which 	helps adjust the next value based on more information.
+
+ Is the Modified Euler method stable?
+	Yes, it is more stable than Forward Euler,it reduces the chance of instability, especially for stiff equations ,if the step size h is too large, it can still have errors, but they are 	smaller compared to Forward Euler.
+
+ Does it provide a better approximation than Forward Euler?
+	Yes, it is more accurate ,forward Euler only looks at the current slope, but Modified Euler takes an extra step to adjust the result ,since it corrects the prediction, the errors do 	not grow as fast and it works better for stiff equations but is still not as stable as Backward Euler.
+
+Backward Euler Behavior:
+ How does the Backward Euler solution behave?
+	The Backward Euler method gives a stable and smooth solution ,unlike the Forward Euler method, it does not oscillate or grow too fast, even with a large step size h.
+
+  Is the Backward Euler method stable?
+	 Yes, it is always stable, even for large h ,This is because it is an implicit method, meaning it calculates Yn+1  using future information
+	This prevents errors from growing too fast, making it a good choice for stiff equations.
+
+How does it compare to Forward Euler and Modified Euler?
+	 More stable than Forward and Modified Euler.
+	 Can handle larger step sizes without becoming unstable.
+	Might be less accurate than Modified Euler for small h.
+	 Needs more computation because it solves an equation at each step.
+
+  Why does it behave differently?
+	 Backward Euler looks ahead and solves for Yn+1 implicitly ,this makes it resistant to large changes, preventing instability.
+
+Step Size Impact:
+  how the step size h affects the stability and accuracy of each method?
+	Forward Euler -> (small h) More accurate but still unstable for stiff equations (large h) Unstable 
+	Modified Euler -> (small h) More accurate, better than Forward Euler (large h) Can become unstable but still better than Forward Euler
+	Backward Euler -> (small h) Still accurate, slightly better with small h (large h) Very stable even for large h, but less accurate
+ 
+ What happens if we increase or decrease h?
+	If we decrease h :
+	Accuracy improves because the method follows the curve more closely.
+	Computation takes longer because there are more steps.
+	Forward Euler becomes a little more stable, but still not good for stiff equations.
+	Backward Euler remains stable and accurate.
+	 If we increase h :
+	Forward Euler becomes unstable—the solution may oscillate or grow incorrectly.
+	Modified Euler starts losing accuracy but may still work for some cases.
+	Backward Euler remains stable, but the solution may be less accurate.
+
+ Stability Region of Each Method
+	Each numerical method has a stability region, meaning it only works correctly for certain values of h.
+	Forward Euler has a very small stability region and becomes unstable for stiff equations.
+	Modified Euler has a larger stability region but can still become unstable for very large h.
+	Backward Euler is unconditionally stable, meaning it remains stable no matter how large h is.
+
+Explicit vs. Implicit Methods:
+ What is the difference between explicit and implicit methods?
+	Explicit Methods (e.g., Forward Euler, Modified Euler)	:
+	Compute Yn+1 using only known values from the current step Yn
+​	Simple & fast
+	Can be unstable for stiff ODEs.
+	Implicit Methods (e.g., Backward Euler):
+	Compute Yn+1 by solving an equation that depends on Yn+1 itself.
+	More stable, especially for stiff ODEs	
+	Slower because it requires solving an equation at each step.
+ 
+ How does the choice affect stability?
+	Explicit methods are unstable for stiff ODEs unless the step size h is very small.
+	Implicit methods remain stable even for large h because they control the rapid changes in stiff equations.
+	For non-stiff ODEs, explicit methods work fine and are faster.
+	For stiff ODEs, implicit methods are preferred, even if they take more time to compute.
+
+Stability Condition:
+ 1. Applying the Forward Euler Method:
+	The Forward Euler method is given by: Y𝑛+1 = Y𝑛+ℎ𝜆 Yn = (1+ℎ𝜆)Yn
+	For the method to be numerically stable, the solution should not grow uncontrollably, which means the magnitude of the coefficient must be less than 1: ∣1+hλ∣<1
+	−1<1+hλ<1
+	Subtract 1 from all sides: −2<hλ<0
+	Divide by λ (assuming λ<0): 0<h< 2/∣λ∣
+	Thus, the maximum allowable step size for stability is: h< 2/∣λ∣
+​	Here, λ=−50, so: h< 2/50 = 0.04
+	This means that Forward Euler will be unstable if h≥0.04.
+
+Does the Experimental Observation Match?
+	Yes, the theoretical prediction matches our experiments.
+	When we used h=0.04, the solution was on the edge of stability.
+	When we tried h>0.04, the Forward Euler solution became unstable, oscillating or exploding.
+	When we decreased h the solution became more accurate and stable.
+	This confirms that the stability condition h<0.04 is correct.
+
+
+
+
+
